@@ -55,6 +55,14 @@ input("Aperte Enter para continuar...")
 # TAREFA 3
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
+    """
+    Função para adicionar uma coluna especifica em uma nova lista.    
+    Args:
+        data: lista contendo todas as colunas
+        index: indice da coluna
+    Returns:
+        nova lista com os dados da coluna selecionada
+    """
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
     for idx in range(len(data)):
@@ -99,8 +107,14 @@ input("Aperte Enter para continuar...")
 # Por que nós não criamos uma função parTODO isso?
 # TAREFA 5
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
-# Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
+    """
+    Função para contar os generos em uma nova lista.    
+    Args:
+        data: lista contendo os dados de genero
+    Returns:
+        lista com os totais de cada genero
+    """
     male = 0
     female = 0
     for data in data_list:
@@ -127,8 +141,14 @@ input("Aperte Enter para continuar...")
 # Agora que nós podemos contar os usuários, qual gênero é mais prevalente?
 # TAREFA 6
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
-# Esperamos ver "Masculino", "Feminino", ou "Igual" como resposta.
 def most_popular_gender(data_list):
+    """
+    Função para retornar o genero mais popular.    
+    Args:
+        data: lista contendo os dados de genero
+    Returns:
+        string com o resultado do mais popular
+    """
     male, female = count_gender(data_list)
     answer = ""
     if male > female:
@@ -167,6 +187,13 @@ print("\nTAREFA 7: Verifique o gráfico!")
 
 
 def count_type_user(data_list):
+    """
+    Função para retornar uma lista com os totais de cada tipo de usuario.    
+    Args:
+        data: lista contendo os dados de tipos de usuarios
+    Returns:
+        lista com os totais de cada tipo de usuario
+    """
     subscriber = 0
     customer = 0
     for data in data_list:
@@ -184,7 +211,7 @@ y_pos = list(range(len(user_types_tuple)))
 plt.bar(y_pos, quantity)
 plt.ylabel('Quantidade')
 plt.xlabel('Tipo de usuario')
-plt.xticks(y_pos, types)
+plt.xticks(y_pos, user_types_tuple)
 plt.title('Quantidade por tipo de usuario')
 plt.show(block=True)
 
