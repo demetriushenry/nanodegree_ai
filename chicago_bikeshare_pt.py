@@ -1,8 +1,7 @@
 # coding: utf-8
 
-# Começando com os imports
 import csv
-from statistics import mean, median
+import math
 
 import matplotlib.pyplot as plt
 
@@ -56,7 +55,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
     """
-    Função para adicionar uma coluna especifica em uma nova lista.    
+    Função para adicionar uma coluna especifica em uma nova lista.
     Args:
         data: lista contendo todas as colunas
         index: indice da coluna
@@ -109,7 +108,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 def count_gender(data_list):
     """
-    Função para contar os generos em uma nova lista.    
+    Função para contar os generos em uma nova lista.
     Args:
         data: lista contendo os dados de genero
     Returns:
@@ -143,7 +142,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 def most_popular_gender(data_list):
     """
-    Função para retornar o genero mais popular.    
+    Função para retornar o genero mais popular.
     Args:
         data: lista contendo os dados de genero
     Returns:
@@ -188,7 +187,7 @@ print("\nTAREFA 7: Verifique o gráfico!")
 
 def count_type_user(data_list):
     """
-    Função para retornar uma lista com os totais de cada tipo de usuario.    
+    Função para retornar uma lista com os totais de cada tipo de usuario.
     Args:
         data: lista contendo os dados de tipos de usuarios
     Returns:
@@ -229,16 +228,77 @@ assert answer != "Nem todas as linhas tem genero", "TAREFA 8: Escreva sua própr
 # -----------------------------------------------------
 
 input("Aperte Enter para continuar...")
+
+
 # Vamos trabalhar com trip_duration (duração da viagem) agora. Não conseguimos tirar alguns valores dele.
 # TAREFA 9
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas parTODO isso, como max() e min().
+def min_list(data):
+    """
+    Função para retornar o valor minimo de uma lista de inteiros.
+    Args:
+        data: lista de inteiros
+    Returns:
+        valor minimo da lista
+    """
+    min = 0
+    for i, dt in enumerate(data):
+        if i == 0:
+            min = dt
+        else:
+            if dt < min:
+                min = dt
+    return min
+
+
+def max_list(data):
+    """
+    Função para retornar o valor maximo de uma lista de inteiros.
+    Args:
+        data: lista de inteiros
+    Returns:
+        valor maximo da lista
+    """
+    max = 0
+    for i, dt in enumerate(data):
+        if i == 0:
+            max = dt
+        else:
+            if dt > max:
+                max = dt
+    return max
+
+
+def median_list(data):
+    """
+    Função para retornar a mediana de uma lista de inteiros.
+    Args:
+        data: lista de inteiros
+    Returns:
+        mediana da lista
+    """
+    data = sorted(data)
+    is_even = len(data) % 2 == 0
+    if not is_even:
+        element_index = (len(data) + 1) // 2
+        median = data[element_index]
+    else:
+        index_first = math.floor(len(data) / 2)
+        index_second = math.ceil(len(data) / 2)
+        first_mean = data[index_first]
+        second_mean = data[index_second]
+        median = (first_mean + second_mean) / 2
+    return round(median)
+
+
+mean_list = lambda data: round(sum(data) / len(data))
 trip_duration_list = column_to_list(data_list, 2)
 trip_duration_list = list(map(int, trip_duration_list))
-min_trip = min(trip_duration_list)
-max_trip = max(trip_duration_list)
-mean_trip = mean(trip_duration_list)
-median_trip = median(trip_duration_list)
+min_trip = min_list(trip_duration_list)
+max_trip = max_list(trip_duration_list)
+mean_trip = mean_list(trip_duration_list)
+median_trip = median_list(trip_duration_list)
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
 print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
@@ -283,12 +343,12 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 
 def count_items(column_list):
-    item_types = []
-    count_items = []
+    item_types = list(set(column_list))
+    count_items = [1 for col in column_list]
     return item_types, count_items
 
 
